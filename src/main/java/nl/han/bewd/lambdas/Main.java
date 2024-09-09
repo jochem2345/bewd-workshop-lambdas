@@ -23,8 +23,26 @@ public class Main {
 
         System.out.println("Met <nieuw> vervoer (Stap 2)  ");
         System.out.println("TODO:");
+        mijnReis.setSpits(false);
+        VervoerStrategy fatbikeVervoer = new OpgevoerdeFatbikeVervoerStrategy();
+        mijnReis.simuleerReis(fatbikeVervoer); // Met opgevoerde fatbike
+        mijnReis.setSpits(true);
+        mijnReis.simuleerReis(fatbikeVervoer); // Met opgevoerde fatbike in spits
 
         System.out.println("Met <nieuw> vervoer, lambda edition! (Stap 5)");
         System.out.println("TODO:");
+        VervoerStrategy lambdaAuto = (s) -> {
+            if (s) {
+                return 60;
+            } else {
+                return 30;
+            }
+        };
+        mijnReis.simuleerReis(lambdaAuto);
+        mijnReis.setSpits(false);
+        mijnReis.simuleerReis(lambdaAuto);
+
+        VervoerStrategy lambdaUFO = s -> 1;
+        mijnReis.simuleerReis(lambdaUFO);
     }
 }
